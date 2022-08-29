@@ -43,31 +43,31 @@ document.getElementById('new-ramen').addEventListener('submit', addFormDetails)
 function addFormDetails(event) {
     event.preventDefault();
    
-    const menu = {
+    const newMenuDetails = {
       name: event.target["new-name"].value,
       restaurant: event.target["new-restaurant"].value,
       image: event.target["new-image"].value,
       rating: event.target["new-rating"].value,
       comment: event.target["new-comment"].value
   }
-   addRamens(menu)
-   addRamenImage(menu)
+   addRamens(newMenuDetails)
+   addRamenImage(newMenuDetails)
    event.target.reset()
         
 }
 // Adding New ramens via the Submit form
-const addRamens = (menu) => {
+const addRamens = (newMenuDetails) => {
   fetch("http://localhost:3000/ramens", {
       method: "POST",
       headers: {
           "Content-Type": "application/json",
            Accept: "application/json"
       },
-      body: JSON.stringify(menu)
+      body: JSON.stringify(newMenuDetails)
   })
-  .then(res => res.json())
+  .then(response => response.json())
   .then(data => console.log(data))
-  .catch(err => console.log(err.message))
+  .catch(error => console.log(error.message))
      
 }
 init()
